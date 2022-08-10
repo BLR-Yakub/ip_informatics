@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    <title>Hello, world!</title>
+  </head>
+  <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/">PATENT-BRIDGE</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        
+      </div>
+    </nav>
+    
+    <div class="container">
+        <form method="POST">
+          <div class="mb-3">
+            <label for="pat_no" class="form-label">Enter the patent number</label>
+            <select name="pat_no" class="selectpicker form-control">
+                {% for o in data %}
+              <option value="{{ o.patent_id}}">{{ o.patent_id }}</option>
+              {% endfor %}
+            </select>
+           
+          </div>
+          
+          <button type="submit" class="btn btn-primary mb-5">Enter</button>
+          
+          
+        </form>
+    
+    </div>
+    
+    
+    
+    <div class="container">
+       <h6> {{ pat }} </h6>
+    </div>
+    
+    <br>
+    
+    <form action="/download">
+       <button class="btn3 btn-primary mb-5"><i class="fa fa-download"></i> Download Sequences</button>
+    
+    </form>
+    
+    <div class="container">
+        <form action="/convert" method="POST">
+          <div class="mb-3">
+            
+            
+            <label for="cod" class="form-label">Select the sequence</label>
+            <select name="cod" class="selectpicker form-control">
+                {% for o in data2 %}
+              <option value="{{ o.seq}}">{{ o.seq }}</option>
+              {% endfor %}
+            </select>
+            
+          </div>
+          
+          <button type="submit" class="btn2 btn btn-primary mb-5">Submit</button>
+          
+          
+        </form>
+        
+    
+    </div>
+    
+    <div class="container">
+    <form action="/download_blast_results">
+       <button class="btn" style="width:100%"><i class="fa fa-download"></i> Download Blast Results</button>
+    
+    </form>
+    </div>
+    
+    
+<div class="container my_cls">
+    <table>
+    <tr>
+        {% for col in column_names %}
+        <th>{{col}}</th>
+        {% endfor %}
+    </tr>
+    {% for row in row_data %}
+    <tr>
+        {% for col, row_ in zip(column_names, row) %}
+        
+        <td>{{row_}}</td>
+        
+        {% endfor %}
+    </tr>
+    {% endfor %}
+
+</table>
+</div>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    -->
+  </body>
+</html>
